@@ -15,7 +15,7 @@ function App() {
 	useEffect(() => {
 		db.collection("todos").orderBy("timestamp", order ? "asc" : "desc").onSnapshot(snapshot => {
 			console.log("data loop is", snapshot.docs.map(doc => doc.data().todo));
-			setTodos(snapshot.docs.map(doc => doc.data().todo))
+			setTodos(snapshot.docs.map(doc => ({id:doc.id, todo: doc.data().todo})))
 		})
 	}, [order])
 
@@ -55,7 +55,7 @@ function App() {
 					</Button>
 				</form>
 			</div>
-			<FormControlLabel control={<Switch labelPlacement="top" defaultChecked={order} onChange={swithDisplayTodo} />} label="Ascending/Descending" />
+			<FormControlLabel control={<Switch {...label} labelPlacement="top" defaultChecked={order} onChange={swithDisplayTodo} />} label="Ascending/Descending" />
 			<Todos loopData={todos} />
 		</div>
 	);
