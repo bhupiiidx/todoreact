@@ -13,9 +13,11 @@ function App() {
 
 
 	useEffect(() => {
+		console.log("order current status",order);
+		console.log("todos len=>",todos.length,"data",todos);
 		db.collection("todos").orderBy("timestamp", order ? "asc" : "desc").onSnapshot(snapshot => {
 			console.log("data loop is", snapshot.docs.map(doc => doc.data().todo));
-			setTodos(snapshot.docs.map(doc => ({id:doc.id, todo: doc.data().todo})))
+			setTodos(snapshot.docs.map(doc => ({id:doc.id, todo: doc.data().todo, inprogress : doc.data().inprogress})))
 		})
 	}, [order])
 
@@ -25,9 +27,11 @@ function App() {
 		db.collection("todos").add({
 			todo: input,
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+			inprogress: true,
 		})
 		setTodos([...todos, input])
 		setInput('')
+		setOrder(order)
 	}
 
 	const label = { inputProps: { 'aria-label': 'Switch demo' } };
