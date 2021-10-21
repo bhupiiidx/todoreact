@@ -40,3 +40,11 @@
 ul{
   padding: 0 !important;
 }
+
+.listItem{
+  background-color: #e3f2fd5c !important;
+  padding: 20px !important;
+  color: #212121 !important;
+  margin-bottom:10px !important;
+  border-radius: 10px;
+}

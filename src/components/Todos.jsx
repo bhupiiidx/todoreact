@@ -6,7 +6,7 @@ function Todos(props) {
      return (
           <Container>
                <h3 style={{"textAlign":"left"}}>List of todo items</h3>
-               <ul>{props.loopData.map(todo => (<Todo todo={todo} />))}</ul>
+               <ul>{props.loopData.map((todo,index) => (<Todo todo={todo} indexing={index} />))}</ul>
           </Container>
      )
 }
